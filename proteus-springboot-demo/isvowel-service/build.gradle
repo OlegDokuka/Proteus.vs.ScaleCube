@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'application'
+    id 'org.springframework.boot' version '2.0.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.5.RELEASE'
+}
+
+mainClassName = 'com.netifi.proteus.demo.isvowel.Application'
+sourceCompatibility = 1.8
+
+ext {
+    protobufVersion = '3.6.0'
+    proteusVersion = '0.8.5'
+    springbomVersion = 'Cairo-SR1'
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/netifi/netifi-oss"
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.spring.platform:platform-bom:${springbomVersion}"
+    }
+}
+
+dependencies {
+    compile project(':proteus-springboot-demo:isvowel-idl')
+    compile ('com.netifi.proteus:proteus-spring-boot-starter:0.3.4')
+
+    // These can be turned on to show integration with Prometheus and OpenTracing
+    //compile "io.netifi.proteus:metrics-micrometer:${proteusVersion}"
+    //compile "io.netifi.proteus:tracing:${proteusVersion}"
+}
+
+configurations.all {
+    resolutionStrategy {
+        dependencySubstitution {
+            substitute module('com.google.guava:guava') with module('com.google.guava:guava:22.0')
+        }
+    }
+}

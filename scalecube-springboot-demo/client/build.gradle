@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.5.RELEASE'
+}
+
+mainClassName = 'com.netifi.proteus.demo.ClientApplication'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+ext {
+    protobufVersion = '3.6.0'
+    proteusVersion = '0.8.5'
+    springbomVersion = 'Cairo-SR1'
+}
+
+dependencies {
+    compile project(':scalecube-springboot-demo:vowelcount-idl')
+    compile('org.springframework.boot:spring-boot-starter') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    compile 'io.scalecube:scalecube-services:2.1.10'
+}

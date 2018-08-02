@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+    id 'org.springframework.boot' version '2.0.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.5.RELEASE'
+}
+
+mainClassName = 'com.netifi.proteus.demo.ClientApplication'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/netifi/netifi-oss"
+    }
+}
+
+ext {
+    protobufVersion = '3.6.0'
+    proteusVersion = '0.8.5'
+    springbomVersion = 'Cairo-SR1'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.spring.platform:platform-bom:${springbomVersion}"
+    }
+}
+
+dependencies {
+    compile project(':proteus-springboot-demo:vowelcount-idl')
+    compile ('com.netifi.proteus:proteus-spring-boot-starter:0.3.4')
+}
+
+configurations.all {
+    resolutionStrategy {
+        dependencySubstitution {
+            substitute module('com.google.guava:guava') with module('com.google.guava:guava:22.0')
+        }
+    }
+}

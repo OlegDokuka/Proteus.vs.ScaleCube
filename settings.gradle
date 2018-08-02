@@ -1,0 +1,24 @@
+rootProject.name = 'demo'
+
+include "proteus-springboot-demo"
+fileTree("proteus-springboot-demo") {
+  include '**/build.gradle'
+  exclude 'build.gradle'      // Exclude the root project
+}.collect {
+  relativePath(it.parent).replace(File.separator, ':')
+}
+.each {
+  include(it)
+}
+
+include "scalecube-springboot-demo"
+fileTree("scalecube-springboot-demo") {
+  include '**/build.gradle'
+  exclude 'build.gradle'      // Exclude the root project
+}.collect {
+  relativePath(it.parent).replace(File.separator, ':')
+}
+.each {
+  include(it)
+}
+

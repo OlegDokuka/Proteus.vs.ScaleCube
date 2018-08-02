@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+sourceCompatibility = 1.8
+
+ext {
+    protobufVersion = '3.6.0'
+    proteusVersion = '0.8.5'
+    springbomVersion = 'Cairo-SR1'
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+
+    compile 'io.scalecube:scalecube-services:2.1.10'
+}
